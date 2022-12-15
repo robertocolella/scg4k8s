@@ -10,7 +10,7 @@ spec:
     filters:
       - SetPath=/uuid
       - AddResponseHeader=tanzu,responseheader
-      - CircuitBreaker=myCircuitBreaker
+      - CircuitBreaker=myCircuitBreaker:4s
       - RateLimit=2,5s
 
 # When defining a RouteConfiguration, you can add the RateLimit filter by including it in the list of filters for the route. The filter accepts 4 options:
