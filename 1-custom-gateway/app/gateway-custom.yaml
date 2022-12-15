@@ -5,4 +5,4 @@ metadata:
 spec:
   extensions:
     custom:
-      - dockerhub.io/robertocolella/scg-test-extensions:dev
+      - robertocolella/scg-test-extensions:dev
