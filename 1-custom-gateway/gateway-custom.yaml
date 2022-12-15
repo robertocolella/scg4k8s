@@ -1,0 +1,8 @@
+apiVersion: "tanzu.vmware.com/v1"
+kind: SpringCloudGateway
+metadata:
+  name: custom-my-gateway
+spec:
+  extensions:
+    custom:
+      - addmycustomheadergatewayfilter

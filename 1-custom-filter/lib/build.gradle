@@ -1,0 +1,39 @@
+ plugins {
+ 	id 'java-library'
+ }
+
+ group = 'com.vmware.scg.extensions'
+ version = '0.0.1-SNAPSHOT'
+ sourceCompatibility = '11'
+
+ repositories {
+ 	mavenCentral()
+ }
+
+ ext {
+ 	set('springCloudVersion', "2021.0.3")
+ 	set('springBootVersion', "2.7.0")
+ }
+
+ dependencies {
+ 	implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+ 	implementation platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
+ 	implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
+ 	/* Not required for the sample app but will be useful for more complex extensions
+ 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+ 	implementation 'org.springframework.boot:spring-boot-starter-security'
+ 	*/
+
+ 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+ 	// Not required for the sample app but will be useful for more complex extensions
+ 	// testImplementation 'org.springframework.security:spring-security-test'
+ 	testImplementation 'com.github.tomakehurst:wiremock:2.27.2'
+ }
+
+ test {
+ 	useJUnitPlatform()
+
+ 	testLogging {
+ 		exceptionFormat = 'full'
+ 	}
+ }
