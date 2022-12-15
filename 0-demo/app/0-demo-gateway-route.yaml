@@ -6,6 +6,6 @@ spec:
   routes:
   - uri: https://httpbin.org/uuid
     predicates:
-      - Path=/uuid
+      - Path=/
     filters:
       - StripPrefix=0
