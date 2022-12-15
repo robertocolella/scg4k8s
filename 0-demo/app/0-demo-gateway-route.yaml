@@ -4,8 +4,10 @@ metadata:
   name: my-gateway-routes
 spec:
   routes:
-  - uri: https://inps.it
+  - uri: https://httpbin.org
     predicates:
-      - Path=/inps
+      - Path=/trial
     filters:
-      - StripPrefix=1
+      - SetPath=/uuid
+      - AddResponseHeader=tanzu,responseheader
+      - RateLimit=2,5s
