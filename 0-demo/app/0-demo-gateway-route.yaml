@@ -4,16 +4,28 @@ metadata:
   name: my-gateway-routes
 spec:
   routes:
+  # - uri: https://httpbin.org
+  #   predicates:
+  #     - Path=/demo/**
+  #     - Host=**.example.com
+  #     - Weight=group1, 5
+  #   filters:
+  #     - SetPath=/uuid
   - uri: https://httpbin.org
     predicates:
-      - Path=/trial
+      - Path=/demo/{delay}
+      - Host=**.example.com
     filters:
-      - SetPath=/uuid
+      - SetPath=/drip
       - AddResponseHeader=tanzu,responseheader
+      - AddRequestParameter=duration, 0 # time to drip each byte (seconds)
+      - AddRequestParameter=numbytes, 10
+      - AddRequestParameter=code, 200   # response code
+      - AddRequestParameter=delay, {delay}  # delay before responding (seconds)
       - CircuitBreaker=myCircuitBreaker:4s
 
-# When defining a RouteConfiguration, you can add the RateLimit filter by including it in the list of filters for the route. The filter accepts 4 options:
-# Number of requests accepted during the window.
-# Duration of the window: by default milliseconds, but you can use s, m or h suffix to specify it in seconds, minutes or hours.
-# (Optional) User partition key: it's also possible to apply rate limiting per user, that is, different users can have its own throughput allowed based on an identifier found in the request. Set whether the key is in a JWT claim or HTTP header with '' or '' syntax.
-# (Optional) It is possible to rate limit by IP addresses. Note, this cannot be combined with the rate limiting per user.
+      # A list of status codes that will trigger the fallback behaviour, this can be expressed in number and text format separated by a colon.
+      # The failure rate threshold above which the circuit breaker will be opened (default 50%, expressed as float value).
+      # Duration of wait time before closing again (default 60s).
+
+      # time http :8080/demo/5 Host:example.com
