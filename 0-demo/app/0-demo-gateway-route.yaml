@@ -1,0 +1,11 @@
+apiVersion: "tanzu.vmware.com/v1"
+kind: SpringCloudGatewayRouteConfig
+metadata:
+  name: my-gateway-routes
+spec:
+  routes:
+  - uri: https://inps.it
+    predicates:
+      - Path=/inps
+    filters:
+      - StripPrefix=1
