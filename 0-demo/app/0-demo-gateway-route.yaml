@@ -4,8 +4,8 @@ metadata:
   name: my-gateway-routes
 spec:
   routes:
-  - uri: https://inps.it
+  - uri: https://httpbin.org/uuid
     predicates:
-      - Path=/inps
+      - Path=/uuid
     filters:
-      - StripPrefix=1
+      - StripPrefix=0
