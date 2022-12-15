@@ -1,0 +1,13 @@
+apiVersion: "tanzu.vmware.com/v1"
+kind: SpringCloudGatewayRouteConfig
+metadata:
+  name: my-gateway-routes
+spec:
+  routes:
+  - uri: https://httpbin.org
+    predicates:
+      - Path=/uuid
+      - Host=**.example.com
+    filters:
+      - StripPrefix=0
+      - SetPath=/uuid

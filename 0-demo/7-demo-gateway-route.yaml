@@ -1,0 +1,20 @@
+apiVersion: "tanzu.vmware.com/v1"
+kind: SpringCloudGatewayRouteConfig
+metadata:
+  name: my-gateway-routes
+spec:
+  routes:
+  - uri: https://httpbin.org
+    predicates:
+      - Path=/trial
+    filters:
+      - SetPath=/uuid
+      - AddResponseHeader=tanzu,responseheader
+      - CircuitBreaker=myCircuitBreaker:4s
+      - RateLimit=2,5s
+
+# When defining a RouteConfiguration, you can add the RateLimit filter by including it in the list of filters for the route. The filter accepts 4 options:
+# Number of requests accepted during the window.
+# Duration of the window: by default milliseconds, but you can use s, m or h suffix to specify it in seconds, minutes or hours.
+# (Optional) User partition key: it's also possible to apply rate limiting per user, that is, different users can have its own throughput allowed based on an identifier found in the request. Set whether the key is in a JWT claim or HTTP header with '' or '' syntax.
+# (Optional) It is possible to rate limit by IP addresses. Note, this cannot be combined with the rate limiting per user.
