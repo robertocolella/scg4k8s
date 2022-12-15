@@ -4,8 +4,10 @@ metadata:
   name: my-gateway-routes
 spec:
   routes:
-  - uri: https://httpbin.org/uuid
+  - uri: https://httpbin.org
     predicates:
       - Path=/uuid
+      - Host=**.example.com
     filters:
       - StripPrefix=0
+      - SetPath=/uuid
