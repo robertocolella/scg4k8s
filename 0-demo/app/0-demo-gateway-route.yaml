@@ -7,5 +7,4 @@ spec:
   - uri: https://httpbin.org/uuid
     predicates:
       - Path=/uuid
-    filters:
-      - StripPrefix=0
+
