@@ -4,10 +4,8 @@ metadata:
   name: my-gateway-routes
 spec:
   routes:
-  - uri: https://httpbin.org
+  - uri: https://httpbin.org/uuid
     predicates:
-      - Path=/trial
+      - Path=/uuid
     filters:
-      - SetPath=/uuid
-      - AddResponseHeader=tanzu,responseheader
-      - RateLimit=2,5s
+      - StripPrefix=0
