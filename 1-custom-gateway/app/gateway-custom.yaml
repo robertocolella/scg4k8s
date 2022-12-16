@@ -3,4 +3,6 @@ kind: SpringCloudGateway
 metadata:
   name: custom-my-gateway
 spec:
-
+  extensions:
+    custom:
+      - docker.io/robertocolella/scg-test-extensions:dev
