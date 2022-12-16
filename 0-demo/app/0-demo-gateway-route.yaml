@@ -14,7 +14,9 @@ spec:
       - AddRequestParameter=numbytes, 10
       - AddRequestParameter=code, 200   # response code
       - AddRequestParameter=delay, {delay}  # delay before responding (seconds)
-      - CircuitBreaker=myCircuitBreaker,forward:/inCaseOfFailureUseThis
-  - uri: https://httpbin.org/get
+      - CircuitBreaker=myCircuitBreaker,forward:/get
+  - uri: https://httpbin.org
     predicates:
-      - Path=/inCaseOfFailureUseThis
+      - Path=/get
+    filters:
+      - StripPrefix=0
