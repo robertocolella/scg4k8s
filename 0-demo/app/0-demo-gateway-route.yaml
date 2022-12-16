@@ -4,9 +4,17 @@ metadata:
   name: my-gateway-routes
 spec:
   routes:
+  # - uri: https://httpbin.org
+  #   predicates:
+  #     - Path=/demo/**
+  #     - Host=**.example.com
+  #     - Weight=group1, 5
+  #   filters:
+  #     - SetPath=/uuid
   - uri: https://httpbin.org
     predicates:
       - Path=/demo/{delay}
+      - Host=**.example.com
     filters:
       - SetPath=/drip
       - AddResponseHeader=tanzu,responseheader
@@ -14,9 +22,4 @@ spec:
       - AddRequestParameter=numbytes, 10
       - AddRequestParameter=code, 200   # response code
       - AddRequestParameter=delay, {delay}  # delay before responding (seconds)
-      - CircuitBreaker=myCircuitBreaker,forward:/get
-  - uri: https://httpbin.org
-    predicates:
-      - Path=/get
-    filters:
-      - StripPrefix=0
+      - CircuitBreaker=myCircuitBreaker:4s
