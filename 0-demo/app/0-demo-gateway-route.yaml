@@ -6,8 +6,16 @@ spec:
   routes:
   - uri: https://httpbin.org
     predicates:
+      - Path=/demo/**
+      - Host=**.example.com
+      - Weight=group1, 5
+    filters:
+      - SetPath=/uuid
+  - uri: https://httpbin.org
+    predicates:
       - Path=/demo/{delay}
       - Host=**.example.com
+      - Weight=group1, 5
     filters:
       - SetPath=/drip
       - AddResponseHeader=tanzu,responseheader
