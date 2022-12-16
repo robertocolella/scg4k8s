@@ -6,9 +6,12 @@ spec:
   routes:
   - uri: https://httpbin.org
     predicates:
-      - Path=/demo
+      - Path=/demo/{delay}
       - Host=**.example.com
     filters:
-      - StripPrefix=0
-      - SetPath=/uuid
+      - SetPath=/drip
       - AddResponseHeader=tanzu,responseheader
+      - AddRequestParameter=duration, 0 # time to drip each byte (seconds)
+      - AddRequestParameter=numbytes, 10
+      - AddRequestParameter=code, 200   # response code
+      - AddRequestParameter=delay, {delay}  # delay before responding (seconds)
