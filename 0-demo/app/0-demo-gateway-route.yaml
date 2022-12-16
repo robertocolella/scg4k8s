@@ -7,7 +7,6 @@ spec:
   - uri: https://httpbin.org
     predicates:
       - Path=/demo/{delay}
-      - Host=**.example.com
     filters:
       - SetPath=/drip
       - AddResponseHeader=tanzu,responseheader
