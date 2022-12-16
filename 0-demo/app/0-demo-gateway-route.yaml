@@ -15,4 +15,3 @@ spec:
       - AddRequestParameter=numbytes, 10
       - AddRequestParameter=code, 200   # response code
       - AddRequestParameter=delay, {delay}  # delay before responding (seconds)
-      - CircuitBreaker=myCircuitBreaker,forward:/get,401:NOT_FOUND:500,10,30s
