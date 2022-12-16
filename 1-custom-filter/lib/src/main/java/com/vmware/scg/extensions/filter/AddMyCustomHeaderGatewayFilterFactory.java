@@ -26,7 +26,7 @@ public class AddMyCustomHeaderGatewayFilterFactory
 					= exchange.mutate()
 							  .request(request -> {
 								  request.headers(headers -> {
-									  headers.put(MY_HEADER_KEY, List.of("DEMO SCG INPS"));
+									  headers.put(MY_HEADER_KEY, List.of("DEMO SCG"));
 									  LOGGER.info("Processed request, added" + MY_HEADER_KEY + " header");
 								  });
 							  })
