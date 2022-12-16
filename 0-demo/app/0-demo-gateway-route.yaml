@@ -6,8 +6,9 @@ spec:
   routes:
   - uri: https://httpbin.org
     predicates:
-      - Path=/uuid
+      - Path=/demo
       - Host=**.example.com
     filters:
       - StripPrefix=0
       - SetPath=/uuid
+      - AddResponseHeader=tanzu,responseheader
