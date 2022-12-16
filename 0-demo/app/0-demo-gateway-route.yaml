@@ -10,4 +10,4 @@ spec:
     filters:
       - SetPath=/uuid
       - AddResponseHeader=tanzu,responseheader
-      - RateLimit=2,5s
+      - CircuitBreaker=myCircuitBreaker,forward:/httpbin.org,401:NOT_FOUND:500
