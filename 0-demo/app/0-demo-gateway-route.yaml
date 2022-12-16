@@ -6,8 +6,13 @@ spec:
   routes:
   - uri: https://httpbin.org
     predicates:
-      - Path=/trial
+      - Path=/demo/{delay}
+      - Host=**.example.com
     filters:
-      - SetPath=/uuid
+      - SetPath=/drip
       - AddResponseHeader=tanzu,responseheader
+      - AddRequestParameter=duration, 0 # time to drip each byte (seconds)
+      - AddRequestParameter=numbytes, 10
+      - AddRequestParameter=code, 200   # response code
+      - AddRequestParameter=delay, {delay}  # delay before responding (seconds)
       - CircuitBreaker=myCircuitBreaker,forward:https://httpbin.org,401:NOT_FOUND:500
