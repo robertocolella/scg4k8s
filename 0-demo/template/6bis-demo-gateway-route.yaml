@@ -1,0 +1,22 @@
+apiVersion: "tanzu.vmware.com/v1"
+kind: SpringCloudGatewayRouteConfig
+metadata:
+  name: my-gateway-routes
+spec:
+  routes:
+  - uri: https://httpbin.org
+    predicates:
+      - Path=/demo/{delay}
+    filters:
+      - SetPath=/drip
+      - AddResponseHeader=tanzu,responseheader
+      - AddRequestParameter=duration, 0 # time to drip each byte (seconds)
+      - AddRequestParameter=numbytes, 10
+      - AddRequestParameter=code, 200   # response code
+      - AddRequestParameter=delay, {delay}  # delay before responding (seconds)
+      - CircuitBreaker=myCircuitBreaker,forward:/get
+  - uri: https://httpbin.org
+    predicates:
+      - Path=/get
+    filters:
+      - StripPrefix=0
